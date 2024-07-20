@@ -30,6 +30,7 @@ namespace ApiMateriais.Service
             var material = GetById(id);
             if(material == null)
                 throw new MaterialNotFoundException();
+            material.AlterarNome(nome);
             _materialRepository.Update(id, material);
         } 
     }
