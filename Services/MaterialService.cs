@@ -1,3 +1,4 @@
+using ApiMateriais.Exceptions;
 using ApiMateriais.Models;
 using ApiMateriais.Repository;
 
@@ -14,16 +15,22 @@ namespace ApiMateriais.Service
         } 
 
         public void Create(string nome, int quantidade){
-            Material material= new Material(nome, quantidade);
+            Material material = new Material(nome, quantidade);
             _materialRepository.Create(material);
         } 
 
         public void Delete(Guid id){
-            _materialRepository.Delete(id);
+            var material = GetById(id);
+            if(material == null)
+                throw new MaterialNotFoundException();
+            _materialRepository.Delete(material);
         }  
 
-        public void Update(Guid id, string newNome){
-            _materialRepository.Update(id, newNome);
+        public void Update(Guid id, string nome){
+            var material = GetById(id);
+            if(material == null)
+                throw new MaterialNotFoundException();
+            _materialRepository.Update(id, material);
         } 
     }
 }

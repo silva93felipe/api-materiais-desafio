@@ -1,8 +1,9 @@
 namespace ApiMateriais.Models
 {
     public class Estoque{
-        //public Guid MaterialId { get; private set; }
+        public Material Material { get; private set; }
         public int Quantidade { get; private set; }
+        private Estoque(){}
         public Estoque(int quantidade)
         {
             if(quantidade < 0){
